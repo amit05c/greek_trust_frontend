@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer } from "react";
-import { FAILURE, LOADING, SUCCESS } from "./actionType";
+import { CONSTDATA, FAILURE, LOADING, SUCCESS } from "./actionType";
 import { appReducer } from "./reducer";
 
 export const AppContext = createContext();
@@ -18,7 +18,7 @@ export const AppContextProvider = ({ children }) => {
     dispatch({type:LOADING})
      fetch(`https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json`)
       .then((res) => res.json())
-      .then((res) => dispatch({type:SUCCESS,payload:res}))
+      .then((res) => dispatch({type:CONSTDATA,payload:res}))
       .catch(err=> dispatch({type:FAILURE}))
   };
 

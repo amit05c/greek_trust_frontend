@@ -1,0 +1,8 @@
+.allProd{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    border: 1px solid black;
+    width: 75%;
+   padding: 1rem;
+    
+}
