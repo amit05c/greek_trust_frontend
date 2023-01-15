@@ -8,13 +8,13 @@ const Color = () => {
 const [color,setColor]= useState([])
 const handleColor= (e)=>{
    let newCol=e.target.value
-   let colorCopy= [...color]
-   let index= colorCopy.indexOf(newCol)
+   let colorCopy= [...color]  //[red]
+   let index= colorCopy.indexOf(newCol) //0
    if(index==-1){
     colorCopy.push(newCol)
     setColor(colorCopy)
    }else{
-    colorCopy.splice(index,1)
+    colorCopy.splice(index,1)  //0,1
      setColor(colorCopy)
    }
    console.log(colorCopy)
