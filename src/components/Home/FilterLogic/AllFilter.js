@@ -210,3 +210,8 @@ export const Alldata= (state)=>{
     let alldata= state?.constData
     return alldata
 }
+
+export const SearchResults= (state,search)=>{
+    let result= state?.constData?.filter(el=>el.name.toLowerCase().includes(search.toLowerCase()) || el.color.toLowerCase().includes(search.toLowerCase()) || el.type.toLowerCase().includes(search.toLowerCase()))
+    return result
+}

@@ -3,12 +3,14 @@ import { AppContext } from "../../context/AppContext";
 import styles from "./Product.module.css";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { SUCCESS } from "../../context/actionType";
-import { Alldata, ColorFilter, Color_Gender, Color_Type, Gender_Filter, Gender_Type, Price, Price_Col, Price_Col_Gen, Price_Col_Type, Price_Gender, Price_Type, Price_Type_Gender, Type_Filter, allFilter, gender_col_type } from "./FilterLogic/AllFilter";
+import { Alldata, ColorFilter, Color_Gender, Color_Type, Gender_Filter, Gender_Type, Price, Price_Col, Price_Col_Gen, Price_Col_Type, Price_Gender, Price_Type, Price_Type_Gender, SearchResults, Type_Filter, allFilter, gender_col_type } from "./FilterLogic/AllFilter";
+import SearchBox from "./SearchBox";
 const Products = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch,search } = useContext(AppContext);
   const [searchParams] = useSearchParams();
   const location = useLocation();
   // console.log(state)
+ 
   useEffect(() => {
     const price = searchParams.getAll("price") || "";
     const color = searchParams.getAll("color") || "";
@@ -85,9 +87,16 @@ const Products = () => {
       let output= Alldata(state)
       dispatch({ type: SUCCESS, payload: output });
     }
-  }, [location]);
+    if(search){
+      let output= SearchResults(state,search)
+      dispatch({ type: SUCCESS, payload: output });
+    }
+  }, [location,search]);
   return (
+    <div style={{width:"100%"}}>
+    <SearchBox/>
     <div className={styles.allProd}>
+
       {state?.data?.map((el) => (
         <div key={el.id}>
           <div>
@@ -95,10 +104,12 @@ const Products = () => {
           </div>
           <div>
             <h3>{`Rs ${el.price}`}</h3>
+            <p>{`Type: ${el.type}`}</p>
             <button>Addto cart</button>
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };

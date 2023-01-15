@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import { CONSTDATA, FAILURE, LOADING, SUCCESS } from "./actionType";
 import { appReducer } from "./reducer";
 
@@ -6,14 +6,10 @@ export const AppContext = createContext();
 
  
 
-// const initValue = {
-//   isLoading: false,
-//   isError: false,
-//   data: [],
-// };
 
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer);
+  const [search,setSearch]= useState("")
   const getData = () => {
     dispatch({type:LOADING})
      fetch(`https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json`)
@@ -27,7 +23,7 @@ export const AppContextProvider = ({ children }) => {
   },[]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch,search,setSearch }}>
       {children}
     </AppContext.Provider>
   );
