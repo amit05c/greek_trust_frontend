@@ -9,6 +9,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer);
+  const [totalqty,setqty]= useState(0)
   const [search,setSearch]= useState("")
   const getData = () => {
     dispatch({type:LOADING})
@@ -23,7 +24,7 @@ export const AppContextProvider = ({ children }) => {
   },[]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch,search,setSearch }}>
+    <AppContext.Provider value={{ state, dispatch,search,setSearch,totalqty,setqty }}>
       {children}
     </AppContext.Provider>
   );

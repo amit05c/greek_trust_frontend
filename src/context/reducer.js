@@ -1,10 +1,11 @@
-import { CONSTDATA, FAILURE, LOADING, SUCCESS } from "./actionType";
+import { CARTSUCCESS, CONSTDATA, FAILURE, LOADING, SUCCESS } from "./actionType";
 
 const initValue = {
     isLoading: false,
     isError: false,
     data: [],
-    constData:[]
+    constData:[],
+    cartData:[]
   };
   
 
@@ -31,6 +32,14 @@ export const appReducer = (state=initValue, action) => {
             isLoading:false,
             data: action.payload,
             constData: action.payload
+        }
+      }
+
+      case CARTSUCCESS:{
+        return {
+            ...state,
+            isLoading:false,
+            cartData: action.payload
         }
       }
 

@@ -182,9 +182,9 @@ export const Price= (state,price)=>{
 }
 
 export const ColorFilter= (state,color)=>{
-    let filterColor;
-    color.forEach(col=>{let x= state?.constData?.filter(el=>el.color==col)
-        filterColor=[...x]   
+    let filterColor=[]
+    color.forEach(col=>{let x= state?.constData?.filter(el=>el.color==col)  //[red,black]
+        filterColor=[...filterColor,...x]   
    })
 
    return filterColor

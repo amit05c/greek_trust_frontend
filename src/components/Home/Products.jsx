@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import styles from "./Product.module.css";
 import { useSearchParams, useLocation } from "react-router-dom";
-import { SUCCESS } from "../../context/actionType";
+import { CARTSUCCESS, SUCCESS } from "../../context/actionType";
 import { Alldata, ColorFilter, Color_Gender, Color_Type, Gender_Filter, Gender_Type, Price, Price_Col, Price_Col_Gen, Price_Col_Type, Price_Gender, Price_Type, Price_Type_Gender, SearchResults, Type_Filter, allFilter, gender_col_type } from "./FilterLogic/AllFilter";
 import SearchBox from "./SearchBox";
 const Products = () => {
@@ -92,6 +92,33 @@ const Products = () => {
       dispatch({ type: SUCCESS, payload: output });
     }
   }, [location,search]);
+
+  const handleCart=(item)=>{
+       
+       let output=  state?.cartData?.find(el=>Number(el.id)==Number(item.id))
+       if(output){
+         if(output.count *1 <item.quantity*1){
+          // console.log('amit')
+          console.log(output)
+          let newCount= output.count+1
+          console.log(newCount)
+          let filterdata= state?.cartData.filter(el=>Number(el.id)!==Number(item.id))
+          let updateItem= {...output,count:newCount}
+          let updatedCart=[...filterdata,updateItem]
+          dispatch({type:CARTSUCCESS,payload:updatedCart})
+        }else{
+          alert(`This product is not availabe this much quantity`)
+        }
+       }else{
+        console.log("ghosh")
+         let newItem= {...item,count:1}
+         let updatedCart=[...state.cartData,newItem]
+
+         dispatch({type:CARTSUCCESS,payload:updatedCart})
+       }
+       
+       
+  }
   return (
     <div style={{width:"100%"}}>
     <SearchBox/>
@@ -105,7 +132,7 @@ const Products = () => {
           <div>
             <h3>{`Rs ${el.price}`}</h3>
             <p>{`Type: ${el.type}`}</p>
-            <button>Addto cart</button>
+            <button onClick={()=>handleCart(el)} style={{padding:"0.5rem"}}>Addto cart</button>
           </div>
         </div>
       ))}

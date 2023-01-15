@@ -1,9 +1,37 @@
 .allProd{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 75%;
    padding: 1rem;
    margin: auto;
     
+}
+
+@media (max-width:900px) {
+
+    .allProd{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+   
+}
+
+@media (max-width:620px) {
+
+    .allProd{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap:1rem;
+    }
+   
+}
+
+@media (max-width:500px) {
+
+    .allProd{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+   
 }

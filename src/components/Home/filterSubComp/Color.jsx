@@ -30,7 +30,7 @@ useEffect(()=>{
 },[color])
   return (
     <div style={{marginTop:"1rem"}}>
-    <h2>color</h2>
+    <h2>Color</h2>
     <div>
       <div>
       <input type="checkbox" value={"Red"} onChange={handleColor} />

@@ -31,7 +31,7 @@ const Gender = () => {
   },[gender])
   return (
     <div style={{marginTop:"1rem"}}>
-      <h3>Gender</h3>
+      <h2>Gender</h2>
       <div>
         <div>
           <input type="checkbox" value={"Men"} onChange={handleGender} />

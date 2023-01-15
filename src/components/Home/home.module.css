@@ -1,8 +1,9 @@
 .products{
     margin: 2rem;
-    pad: 2rem;
+    padding-top: 4rem;
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin-left: 25%;
+    margin-top: 2rem;
 }
