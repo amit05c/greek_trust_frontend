@@ -12,86 +12,88 @@ const Products = () => {
   // console.log(state)
  
   useEffect(() => {
+
     const price = searchParams.getAll("price") || "";
     const color = searchParams.getAll("color") || "";
     const type = searchParams.getAll("type") || "";
     const gender = searchParams.getAll("gender") || "";
      console.log(price,color,gender,type)
+     if(search){
+      let output= SearchResults(state,search)
+     return dispatch({ type: SUCCESS, payload: output });
+    }
     if (
       price.length > 0 &&
       color.length > 0 &&
       gender.length > 0 &&
       type.length > 0
     ) {
-      let output = allFilter(state, price, color, gender, type);
+      let output = state&&allFilter(state, price, color, gender, type);
       dispatch({ type: SUCCESS, payload: output });
     } else if (price.length > 0 && color.length > 0 && gender.length > 0) {
       // pcg
-      let output = Price_Col_Gen(state, price, color, gender);
+      let output = state&&Price_Col_Gen(state, price, color, gender);
       dispatch({ type: SUCCESS, payload: output });
     } else if (price.length > 0 && color.length > 0 && type.length > 0) {
       // pct
-      let output= Price_Col_Type(state, price, color, type)
+      let output= state&&Price_Col_Type(state, price, color, type)
       dispatch({ type: SUCCESS, payload: output });
     }else if( color.length > 0 &&
       gender.length > 0 &&
       type.length > 0){
       // gtc
       console.log("ghosh")
-      let output= gender_col_type(state,gender,color,type)
+      let output= state&&gender_col_type(state,gender,color,type)
       dispatch({ type: SUCCESS, payload: output });
     }else if(price.length > 0 && type.length > 0 && gender.length > 0){
       // ptg
-      let output= Price_Type_Gender(state,price,type,gender)
+      let output= state&&Price_Type_Gender(state,price,type,gender)
       dispatch({ type: SUCCESS, payload: output });
     }else if(price.length>0 && color.length>0){
       // pc
       // Price_Col
-      let output= Price_Col(state,price,color)
+      let output= state&&Price_Col(state,price,color)
       dispatch({ type: SUCCESS, payload: output });
     }else if(price.length>0 && gender.length>0){
       // pg
-      let output= Price_Gender(state,price,gender)
+      let output= state&&Price_Gender(state,price,gender)
       dispatch({ type: SUCCESS, payload: output });
     }else if(price.length>0 && type.length>0){
       // pt
-      let output= Price_Type(state,price,type)
+      let output= state&&Price_Type(state,price,type)
       dispatch({ type: SUCCESS, payload: output });
     }else if(color.length>0 && gender.length>0){
       //cg
-      let output= Color_Gender(state,color,gender)
+      let output= state&&Color_Gender(state,color,gender)
       dispatch({ type: SUCCESS, payload: output });
     }else if(color.length>0 && type.length>0 ){
       // ct
-      let output= Color_Type(state,color,type)
+      let output= state&&Color_Type(state,color,type)
       dispatch({ type: SUCCESS, payload: output });
     }else if(gender.length>0 && type.length>0){
-      let output= Gender_Type(state,gender,type)
+      let output= state&&Gender_Type(state,gender,type)
       dispatch({ type: SUCCESS, payload: output });
     }else if(price.length>0){
       // price only
-      let output= Price(state,price)
+      let output= state&&Price(state,price)
       dispatch({ type: SUCCESS, payload: output });
     }else if(color.length>0){
       // color only
-      let output= ColorFilter(state,color)
+      let output= state&&ColorFilter(state,color)
       dispatch({ type: SUCCESS, payload: output });
     }else if(gender.length>0){
       // gender only
-      let output= Gender_Filter(state,gender)
+      let output= state&&Gender_Filter(state,gender)
       dispatch({ type: SUCCESS, payload: output });
     }else if(type.length>0){
-      let output= Type_Filter(state,type)
+      let output= state&&Type_Filter(state,type)
       dispatch({ type: SUCCESS, payload: output });
     }else{
       let output= Alldata(state)
       dispatch({ type: SUCCESS, payload: output });
     }
-    if(search){
-      let output= SearchResults(state,search)
-      dispatch({ type: SUCCESS, payload: output });
-    }
-  }, [location,search]);
+   
+  }, [location.search,search]);
 
   const handleCart=(item)=>{
        
